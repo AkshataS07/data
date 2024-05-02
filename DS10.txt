@@ -1,0 +1,33 @@
+#imports
+from sklearn.datasets import load_iris
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+iris = load_iris()
+
+data = pd.DataFrame(iris.data, columns = iris.feature_names)
+data['label'] = iris.target
+data.sample(5)
+
+data.info()
+
+sns.histplot(data = data, x = 'sepal length (cm)', kde= True);
+
+sns.histplot(data = data, x = 'sepal width (cm)', kde= True, color = "orange");
+
+sns.histplot(data = data, x = 'petal length (cm)', kde= True, color = "green");
+
+sns.histplot(data = data, x = 'petal width (cm)', kde= True, color = "red");
+
+figure = plt.figure(figsize = (12,8))
+sns.boxplot(data= data)
+plt.show()
+
+from matplotlib.cbook import boxplot_stats
+stats = boxplot_stats(data['sepal width (cm)'])
+stats
+
+outliers = stats[0].get("fliers")
+
+outliers

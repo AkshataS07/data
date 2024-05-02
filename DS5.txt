@@ -1,0 +1,49 @@
+#imports
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import warnings
+import matplotlib.pyplot as plt
+warnings.filterwarnings("ignore")
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix,classification_report
+
+data = pd.read_csv("Social_Network_Ads.csv")
+
+data.sample(5)
+
+data.info()
+
+data
+
+data.isna().sum()
+
+# Target label : 'Purchased'
+sns.countplot(data = data, x = 'Purchased');
+
+# Finding useful features
+sns.heatmap(data[['Age','EstimatedSalary','Purchased']].corr(), annot = True, cmap= 'coolwarm' );
+
+features = data[['Age', 'EstimatedSalary']]
+label = data['Purchased']
+
+scaler = StandardScaler()
+features = scaler.fit_transform(features)
+
+x = features
+y = label
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+model = LogisticRegression()
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+
+y_pred
+
+sns.heatmap(confusion_matrix(y_test, y_pred), annot= True)
+
+print(classification_report(y_test, y_pred))

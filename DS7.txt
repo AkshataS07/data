@@ -1,0 +1,76 @@
+import nltk
+from nltk import word_tokenize, sent_tokenize
+from nltk import pos_tag
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('omw-1.4')
+
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce commodo mauris id justo condimentum dignissim. Nullam placerat semper dapibus. Pellentesque ac risus nulla. Phasellus ut dapibus nunc, id aliquam dolor."
+
+print(word_tokenize(text))
+
+print(sent_tokenize(text))
+
+to_tag = word_tokenize(text)
+
+print(pos_tag(to_tag))
+
+stop_words = set(stopwords.words("english"))
+print(stop_words)
+
+to_clean = word_tokenize(text)
+to_clean
+
+
+no_stopwords_text = []
+for token in to_clean:
+    if(token not in stop_words):
+        no_stopwords_text.append(token)
+
+print(no_stopwords_text)
+
+stemmer = PorterStemmer()
+
+stemmed_words = []
+for token in no_stopwords_text:
+    stemmed_word = stemmer.stem(token)
+    stemmed_words.append(stemmed_word)
+
+print(stemmed_words)
+
+lemmatizer = WordNetLemmatizer()
+lemmatized_words = []
+for token in no_stopwords_text:
+    lemmatized = lemmatizer.lemmatize(token)  # Assuming you want to lemmatize verbs (you can change the 'pos' argument as needed)
+    lemmatized_words.append(lemmatized)
+
+print(lemmatized_words)
+
+vectorizer = TfidfVectorizer()
+
+corpus = [
+    "I love to eat pizza",
+    "Pizza is my favorite food",
+    "I enjoy eating pizza with friends",
+    "I like to have pizza for dinner",
+    "Pizza toppings include cheese, pepperoni, and mushrooms"
+]
+
+vectorizer = TfidfVectorizer()
+vectorizer
+
+tfidf_matrix = vectorizer.fit_transform(corpus)
+
+feature_names = vectorizer.get_feature_names_out()
+
+
+print(tfidf_matrix.toarray())
+
+print(feature_names)

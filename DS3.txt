@@ -1,0 +1,48 @@
+import pandas as pd
+
+bike_df = pd.read_csv("SampleSuperstore.csv")
+
+#Display first few rows of the dataset
+print("First few rows of the bike price dataset:")
+print(bike_df.head())
+
+grouped_stats = bike_df.groupby('Selling_Price')['Year'].describe()
+
+print("\nSummary statistics of selling price grouped by year:")
+print(grouped_stats)
+
+mean_price_by_year = bike_df.groupby('Selling_Price')['Year'].mean().tolist()
+# Display the list of mean ages for each passenger class
+print("\nMean Price for each year:")
+print(mean_price_by_year)
+
+import seaborn as sns
+import pandas as pd
+
+iris = pd.read_csv('https://github.com/YBIFoundation/Dataset/raw/main/IRIS.csv')
+
+print("First few rows of the Iris dataset:")
+print(iris.head())
+
+# 1. Display basic statistical details for 'Iris-setosa'
+setosa_stats = iris[iris['species'] == 'setosa'].describe()
+
+# Display the statistical details for 'Iris-setosa'
+print("\nStatistical details for 'Iris-setosa':")
+print(setosa_stats)
+
+# 2. Display basic statistical details for 'Iris-versicolor'
+versicolor_stats = iris[iris['species'] == 'versicolor'].describe()
+
+
+# Display the statistical details for 'Iris-versicolor'
+print("\nStatistical details for 'Iris-versicolor':")
+print(versicolor_stats)
+
+# 3. Display basic statistical details for 'Iris-virginica'
+virginica_stats = iris[iris['species'] == 'virginica'].describe()
+
+# Display the statistical details for 'Iris-virginica'
+print("\nStatistical details for 'Iris-virginica':")
+print(virginica_stats)
+

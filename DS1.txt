@@ -1,0 +1,33 @@
+import pandas as pd
+
+import numpy as np
+
+add_df = pd.read_csv("https://github.com/YBIFoundation/Dataset/raw/main/Bike%20Prices.csv")
+
+print("First few rows of the bike price dataset:")
+print(add_df.head())
+
+add_df.isnull()
+
+add_df.notnull().sum()
+
+print("\nInformation about the dataset:")
+print(add_df.info())
+
+print("\nDescriptive statistics of the dataset:")
+print(add_df.describe())
+
+print("\nDimensions of the dataset (rows, columns):", add_df.shape)
+
+print("\nData Types of Variables:")
+print(add_df.dtypes)
+
+df = add_df.dropna()
+
+df
+
+df['col namw with float value , ].astype(int)
+
+df["col name" ].replace({0:"xyz" , 1 : "abc"} , inplace = True)
+
+df
